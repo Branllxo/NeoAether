@@ -9,137 +9,240 @@
             margin: 0;
             padding: 0;
             display: flex;
-            flex-direction: column; /* Los cuadros principales están en columna */
+            flex-direction: column;
             align-items: center;
-            justify-content: flex-start; /* Asegura que los cuadros no se centren verticalmente */
-            height: 100vh;
+            justify-content: flex-start;
+            min-height: 100vh;
             background: url('fondo.gif') no-repeat center center fixed;
             background-size: cover;
         }
         .container {
             display: flex;
-            flex-direction: column; /* Los cuadros se apilarán verticalmente */
+            flex-direction: column;
             align-items: center;
-            justify-content: flex-start; /* Asegura que los cuadros estén alineados al principio */
-            width: 100%; /* Asegura que la estructura no se quede más estrecha */
+            width: 100%;
+            gap: 15px;
         }
         .box {
-            background: rgba(60, 0, 78, 0.2); /* Blanco con difuminado */
+            background: rgba(60, 0, 78, 0.2);
             padding: 20px;
             border-radius: 10px;
             box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.3);
             backdrop-filter: blur(5px);
             text-align: center;
-            width: 100%; /* Se asegura de que ocupe todo el espacio disponible */
-        }
-        .prin1 {
-            width: 100%;
-            max-width: 300px; /* Se asegura de que el cuadro no se haga demasiado grande */
-            position: relative; /* Separación entre prin1 y el siguiente cuadro */
-            margin-bottom: 20px; /* Agrega separación entre prin1 y el siguiente cuadro */
-        }
-        .secon2 {
-            display: flex;
-            flex-direction: column; /* Los cuadros dentro de secon2 se apilarán verticalmente */
-            align-items: center;
-            width: 80%;
-            height: auto;
-            position: relative;
+            width: auto; /* Ajuste al texto */
+            max-width: 90%; /* Para evitar que el cuadro se haga muy grande en pantallas anchas */
         }
         .title {
-            font-size: 36px;
+            font-size: 32px;
             font-weight: bold;
             text-transform: uppercase;
-            background: linear-gradient(90deg, #111, #ff69b4);
+            background: linear-gradient(90deg, #f958ff, #8c00ff);
             -webkit-background-clip: text;
             color: transparent;
         }
-        .survival-box, .enchantment-box {
+        .play-container {
+            margin-top: 15px; /* Separación entre el cuadro y el botón de reproducción */
+            display: flex;
+            justify-content: center;
+        }
+        .play-button {
+            cursor: pointer;
+            width: 50px;
+            height: 50px;
+            border-radius: 10px;
+            background: rgba(255, 255, 255, 0.4);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.3);
+        }
+        .play-button img {
+            width: 100%;
+            height: 100%;
+            border-radius: 10px;
+        }
+        .enchantment-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 15px;
+            width: 100%;
+        }
+        .row {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            width: 100%;
+        }
+        .enchantment-box {
             background: rgba(208, 154, 219, 0.2);
             padding: 10px;
             border-radius: 10px;
             box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.3);
             backdrop-filter: blur(5px);
             text-align: center;
-            width: 80%;
-            margin-bottom: 20px;
+            width: auto; /* Ajuste al texto */
+            min-width: 200px; /* Para que tenga un tamaño mínimo, si es necesario */
+            cursor: pointer;
         }
-        .survival-title, .enchantment-title {
+        .popup {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.26);
+            justify-content: center;
+            align-items: center;
+        }
+        .popup-content {
+            background: rgba(117, 10, 117, 0.6);
+            padding: 20px;
+            border-radius: 10px;
+            max-width: 600px;
+            text-align: center;
+            position: relative;
+            color: white;
+            opacity: 0;
+            transform: scale(0.8);
+        }
+        .popup img {
+            width: 100%;
+            max-height: 300px;
+            object-fit: cover;
+            border-radius: 10px;
+        }
+        .popup-title {
             font-size: 28px;
             font-weight: bold;
-            text-transform: uppercase;
-            background: linear-gradient(90deg, #800080, #ff69b4);
+            background: linear-gradient(90deg, #ffffff, #ffb3e6);
             -webkit-background-clip: text;
             color: transparent;
         }
-        .enchantment-description {
-            font-size: 18px;
-            background: linear-gradient(90deg, white, #ffb6c1);
-            -webkit-background-clip: text;
-            color: transparent;
-        }
-        #playButton {
-            cursor: pointer;
+        .close-btn {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: rgb(119, 0, 255);
+            color: white;
             border: none;
-            background: transparent;
+            padding: 5px 10px;
+            cursor: pointer;
+            border-radius: 5px;
         }
-        .play-box {
-            width: 60px;
-            height: 50px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin: 20px 0;
+        .fade-in {
+            animation: fadeInPopup 0.5s ease-out forwards;
+        }
+        @keyframes fadeInPopup {
+            0% { opacity: 0; transform: scale(0.8); }
+            100% { opacity: 1; transform: scale(1); }
+        }
+        .description {
+            background: linear-gradient(90deg, #ffffff, #d3a6ff);
+            -webkit-background-clip: text;
+            color: transparent;
+            font-size: 18px;
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <!-- Cuadro prin1 -->
-        <div class="box prin1">
+        <!-- Cuadro con título -->
+        <div class="box">
             <h1 class="title">NeoAether</h1>
         </div>
 
-        <!-- Cuadro con el gif de play -->
-        <div class="box play-box">
-            <button id="playButton">
-                <img src="play.gif" alt="Play" width="60" height="60">
-            </button>
-            <audio id="audio" preload="auto">
-                <source src="fondomisic.ogg" type="audio/ogg">
-                Tu navegador no soporta la etiqueta de audio.
-            </audio>
+        <!-- Contenedor para el botón de Play fuera del cuadro de título -->
+        <div class="play-container">
+            <div class="play-button" onclick="toggleMusic()">
+                <img src="play.gif" alt="Play">
+            </div>
         </div>
 
-        <!-- Cuadro secon2 -->
-        <div class="box secon2">
-            <div class="survival-box">
-                <h2 class="survival-title">Survival</h2>
-                <p class="enchantment-description">En nuestra modalidad de supervivencia, los jugadores se sumergen en un mundo lleno de retos y aventuras donde cada decisión cuenta. Con un sistema de juego equilibrado, recursos limitados y una economía basada en la cooperación y el trabajo en equipo, los jugadores deberán construir, explorar y sobrevivir ante la naturaleza salvaje de su entorno. Con biomas personalizados y un mapa lleno de sorpresas, ¡cada jornada será única! ¿Podrás encontrar la manera de prosperar en este mundo sin fin?</p>
+        <div class="box">
+            <h2 class="title">Survival</h2>
+            <p class="description">En nuestra modalidad de supervivencia, los jugadores se sumergen en un mundo lleno de retos y aventuras donde cada decisión cuenta. Con un sistema de juego equilibrado, recursos limitados y una economía basada en la cooperación y el trabajo en equipo, los jugadores deberán construir, explorar y sobrevivir ante la naturaleza salvaje de su entorno. Con biomas personalizados y un mapa lleno de sorpresas, ¡cada jornada será única! ¿Podrás encontrar la manera de prosperar en este mundo sin fin?</p>
+        </div>
+
+        <div class="enchantment-container">
+            <!-- Primera fila -->
+            <div class="row">
+                <div class="enchantment-box" onclick="openPopup(1)">
+                    <h2>Evoker Arcano</h2>
+                </div>
+                <div class="enchantment-box" onclick="openPopup(2)">
+                    <h2>Gorgrash</h2>
+                </div>
             </div>
 
-            <div class="enchantment-box">
-                <h2 class="enchantment-title">Nuevos Encantamientos:</h2>
-                <p class="enchantment-description">¡La magia en Minecraft se expande con nuevos encantamientos! Ahora podrás acceder a habilidades nunca vistas antes, Cada encantamiento traerá un poder especial, desde mejoras en el combate hasta ventajas en la recolección de recursos! ¡descúbrelos todos y lleva tu equipo a otro nivel!</p>
+            <!-- Segunda fila -->
+            <div class="row">
+                <div class="enchantment-box" onclick="openPopup(3)">
+                    <h2>Aldor</h2>
+                </div>
             </div>
 
-            <div class="enchantment-box">
-                <h2 class="enchantment-title">Encantamientos Superiores al Máximo:</h2>
-                <p class="enchantment-description">Los encantamientos no tienen límite en este mundo. Gracias a un sistema único, podrás encantar tus herramientas, armas y armaduras por encima de los niveles tradicionales. Pero no pienses que será fácil.</p>
+            <!-- Tercera fila -->
+            <div class="row">
+                <div class="enchantment-box" onclick="openPopup(4)">
+                    <h2>Frostgor</h2>
+                </div>
+                <div class="enchantment-box" onclick="openPopup(5)">
+                    <h2>Endrak</h2>
+                </div>
             </div>
         </div>
     </div>
 
+    <div id="popup" class="popup">
+        <div id="popup-content" class="popup-content">
+            <button class="close-btn" onclick="closePopup()">X</button>
+            <h2 id="popup-title" class="popup-title"></h2>
+            <img id="popup-image" src="" alt="Descripción">
+            <p id="popup-description" class="description"></p>
+        </div>
+    </div>
+
+    <audio id="background-music" loop>
+        <source src="fondomisic.ogg" type="audio/ogg">
+        <source src="fondomisic.mp3" type="audio/mp3">
+    </audio>
+
     <script>
-        // Script para controlar la reproducción del audio al hacer clic en el gif
-        document.getElementById("playButton").addEventListener("click", function() {
-            var audio = document.getElementById("audio");
-            if (audio.paused) {
-                audio.play(); // Reproduce el audio
+        var musicPlaying = false;
+
+        function toggleMusic() {
+            var audio = document.getElementById("background-music");
+            if (musicPlaying) {
+                audio.pause();
             } else {
-                audio.pause(); // Si el audio ya está sonando, lo pausa
+                audio.play();
             }
-        });
+            musicPlaying = !musicPlaying;
+        }
+
+        function openPopup(id) {
+            var title = ["Evoker Arcano", "Gorgrash", "Aldor", "Frostgor", "Endrak"][id - 1];
+            var descriptions = [
+                "En lo más profundo del mundo, un misterioso comerciante ha surgido: el Evoker Arcano. Este enigmático hechicero no es un enemigo, sino un mercader de poderosos encantamientos que desafían los límites tradicionales. Sin embargo, sus precios no son para cualquiera: solo los aventureros más valientes y prósperos podrán costear la magia que ofrece. ¿Tendrás lo necesario para hacer tratos con él y potenciar tu equipo más allá de lo imaginable?",
+                "En el vasto cráter formado por la guerra, emerge una figura temible: Gorgrash. Este Piglin Bruto, endurecido por los horrores de la guerra, ha logrado dominar las artes oscuras de la forja y la magia. Su comercio ofrece encantamientos más allá de los límites, forjados con la furia de incontables batallas. Pero aquellos que busquen su poder deben estar preparados para enfrentar no solo el precio de sus mercaderías, sino también las consecuencias de desafiar el equilibrio de la guerra misma.",
+                "Entre las calles y los caminos olvidados, aparece un comerciante peculiar: Aldor, el Mercader. Este aldeano ambulante es conocido por llevar consigo una cesta llena de manjares que no solo deleitan el paladar, sino que otorgan poderes extraordinarios. Cada bocado tiene el potencial de mejorar la fuerza, la agilidad o restaurar energías de maneras sorprendentes. Pero ten cuidado, porque sus delicias tienen un precio, y los efectos que pueden generar no siempre son lo que parecen. ¿Te atreverás a probar sus misteriosas ofertas?",
+                "En las regiones más frías y aisladas del mundo, se encuentra un ser imponente: Frostgor. Este golem de nieve, formado por los vientos gélidos y la nieve más pura, no solo protege las tierras heladas, sino que también ofrece algo muy especial a los aventureros. En su aldea congelada, podrás encontrar huevos generadores de mascotas únicas, que te acompañarán en tus viajes. Cada huevo contiene una criatura mágica que puede ayudarte o brindarte poderosos efectos, pero no será fácil obtenerlos. Si deseas adquirir una de estas preciosas criaturas, prepárate para enfrentarte a los desafíos del invierno y pagar el precio que exige este misterioso guardián.",
+                "En lo más profundo del End, donde las dimensiones se entrelazan, aparece Endrak. Este Enderman, misterioso y silencioso, ofrece a los valientes aventureros un comercio único: intercambiar minerales raros por monedas especiales. Estas monedas, imbuídas con el poder del End, son la llave para acceder a los objetos más poderosos de otros comerciantes. Endrak es un ser de pocas palabras, pero su comercio es invaluable. Si logras reunir suficientes minerales, podrás hacer tratos con otros mercaderes que ofrecen encantamientos, mascotas y mucho más. Pero recuerda, la confianza en un comerciante del End nunca es absoluta."
+            ];
+
+            document.getElementById("popup-title").textContent = title;
+            document.getElementById("popup-image").src = "des" + id + ".png";
+            document.getElementById("popup-description").textContent = descriptions[id - 1];
+            document.getElementById("popup").style.display = "flex";
+            document.getElementById("popup-content").classList.add("fade-in");
+        }
+
+        function closePopup() {
+            document.getElementById("popup").style.display = "none";
+        }
     </script>
 </body>
 </html>
