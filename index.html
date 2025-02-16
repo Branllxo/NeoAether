@@ -3,139 +3,143 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Informacion de la modalidad: Survival Z</title>
+    <title>NeoAether</title>
     <style>
         body {
-            background-image: url('cmF.jpg'); /* Imagen de fondo */
-            background-size: cover;
-            background-position: center;
-            background-repeat: no-repeat;
-            background-attachment: fixed; /* Fija la imagen de fondo */
-            min-height: 100vh; /* Asegura que el contenido ocupe al menos toda la ventana */
             margin: 0;
+            padding: 0;
             display: flex;
-            flex-direction: column; /* Organiza en columna */
-            justify-content: flex-start; /* Alinea los elementos hacia el principio */
-            align-items: center; /* Centra horizontalmente */
-            padding-top: 20px;
+            flex-direction: column; /* Los cuadros principales están en columna */
+            align-items: center;
+            justify-content: flex-start; /* Asegura que los cuadros no se centren verticalmente */
+            height: 100vh;
+            background: url('fondo.gif') no-repeat center center fixed;
+            background-size: cover;
         }
-
-        /* Contenedor del título principal */
-        .title-box {
-            background-color: rgba(0, 0, 0, 0.7); /* Fondo oscuro semi-transparente */
+        .container {
+            display: flex;
+            flex-direction: column; /* Los cuadros se apilarán verticalmente */
+            align-items: center;
+            justify-content: flex-start; /* Asegura que los cuadros estén alineados al principio */
+            width: 100%; /* Asegura que la estructura no se quede más estrecha */
+        }
+        .box {
+            background: rgba(60, 0, 78, 0.2); /* Blanco con difuminado */
             padding: 20px;
             border-radius: 10px;
-            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.3); /* Sombra */
-            margin-bottom: 30px; /* Separación entre título y el cuadro principal */
-        }
-
-            .title-box h1 {
-                font-family: 'Arial', sans-serif;
-                font-size: 48px;
-                background: linear-gradient(90deg, #ff0077, #00d4ff);
-                -webkit-background-clip: text;
-                color: transparent;
-                text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.7);
-                font-weight: bold;
-                letter-spacing: 2px;
-                text-transform: uppercase;
-                margin: 0;
-            }
-
-        /* Contenedor principal para los cuadros */
-        .main-box {
-            background-color: rgba(0, 0, 0, 0.7); /* Fondo blanco semi-transparente */
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.3); /* Sombra */
+            box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(5px);
             text-align: center;
-            max-width: 1000px;
-            width: 90%; /* Ancho flexible */
+            width: 100%; /* Se asegura de que ocupe todo el espacio disponible */
         }
-
-        .inner-box-container {
+        .prin1 {
+            width: 100%;
+            max-width: 300px; /* Se asegura de que el cuadro no se haga demasiado grande */
+            position: relative; /* Separación entre prin1 y el siguiente cuadro */
+            margin-bottom: 20px; /* Agrega separación entre prin1 y el siguiente cuadro */
+        }
+        .secon2 {
             display: flex;
-            flex-wrap: wrap; /* Permite que los cuadros se ajusten y bajen de fila si es necesario */
-            justify-content: space-around; /* Espacio entre los cuadros */
-            margin-top: 20px;
+            flex-direction: column; /* Los cuadros dentro de secon2 se apilarán verticalmente */
+            align-items: center;
+            width: 80%;
+            height: auto;
+            position: relative;
         }
-
-        .inner-box {
-            background-color: rgba(255, 255, 255, 0.8); /* Fondo de cada cuadro */
-            padding: 20px;
+        .title {
+            font-size: 36px;
+            font-weight: bold;
+            text-transform: uppercase;
+            background: linear-gradient(90deg, #111, #ff69b4);
+            -webkit-background-clip: text;
+            color: transparent;
+        }
+        .survival-box, .enchantment-box {
+            background: rgba(208, 154, 219, 0.2);
+            padding: 10px;
             border-radius: 10px;
-            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2); /* Sombra de los cuadros */
-            width: 22%; /* Ajuste para que haya 4 cuadros en una fila */
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(5px);
+            text-align: center;
+            width: 80%;
             margin-bottom: 20px;
-            text-align: left;
         }
-
-            .inner-box h2 {
-                font-size: 20px;
-                margin-bottom: 10px;
-                color: #333;
-            }
-
-            .inner-box p {
-                font-size: 14px;
-                color: #555;
-            }
-
-            .inner-box img {
-                width: 100%; /* Imagen del cuadro ajustada al tamaño del cuadro */
-                height: auto;
-                border-radius: 8px;
-                margin-bottom: 10px;
-            }
+        .survival-title, .enchantment-title {
+            font-size: 28px;
+            font-weight: bold;
+            text-transform: uppercase;
+            background: linear-gradient(90deg, #800080, #ff69b4);
+            -webkit-background-clip: text;
+            color: transparent;
+        }
+        .enchantment-description {
+            font-size: 18px;
+            background: linear-gradient(90deg, white, #ffb6c1);
+            -webkit-background-clip: text;
+            color: transparent;
+        }
+        #playButton {
+            cursor: pointer;
+            border: none;
+            background: transparent;
+        }
+        .play-box {
+            width: 60px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 20px 0;
+        }
     </style>
 </head>
 <body>
+    <div class="container">
+        <!-- Cuadro prin1 -->
+        <div class="box prin1">
+            <h1 class="title">NeoAether</h1>
+        </div>
 
-    <!-- Contenedor separado para el título -->
-    <div class="title-box">
-        <h1> survival Z</h1>
-    </div>
+        <!-- Cuadro con el gif de play -->
+        <div class="box play-box">
+            <button id="playButton">
+                <img src="play.gif" alt="Play" width="60" height="60">
+            </button>
+            <audio id="audio" preload="auto">
+                <source src="fondomisic.ogg" type="audio/ogg">
+                Tu navegador no soporta la etiqueta de audio.
+            </audio>
+        </div>
 
-    <!-- Contenedor principal para los cuadros -->
-    <div class="main-box">
-        <div class="inner-box-container">
-            <!-- 1er Cuadro -->
-            <div class="inner-box">
-                <h2>Zombies</h2>
-                <img src="zombie.png" alt="Imagen de Zombies"> <!-- Imagen añadida -->
-                <p></p> <!-- Primera línea vacía -->
-                <p>Al ser un survival Zombie solo abran estos, pero tienen una mejora significativa en su comportamiento. Además, se añadieron 2 mutantes: O'Blood y The Fungus.</p>
-                <p></p> <!-- Tercera línea vacía -->
+        <!-- Cuadro secon2 -->
+        <div class="box secon2">
+            <div class="survival-box">
+                <h2 class="survival-title">Survival</h2>
+                <p class="enchantment-description">En nuestra modalidad de supervivencia, los jugadores se sumergen en un mundo lleno de retos y aventuras donde cada decisión cuenta. Con un sistema de juego equilibrado, recursos limitados y una economía basada en la cooperación y el trabajo en equipo, los jugadores deberán construir, explorar y sobrevivir ante la naturaleza salvaje de su entorno. Con biomas personalizados y un mapa lleno de sorpresas, ¡cada jornada será única! ¿Podrás encontrar la manera de prosperar en este mundo sin fin?</p>
             </div>
 
-            <!-- 2do Cuadro -->
-            <div class="inner-box">
-                <h2>Salud y Alimentación</h2>
-                <img src="salund.png" alt="Imagen de Salud y Alimentación"> <!-- Imagen añadida -->
-                <p></p> <!-- Primera línea vacía -->
-                <p>Reemplazamos la barra de vida común por un sistema de vida que va por partes, además agregamos una barra de sed. Ahora tienes que cuidar tanto tu hambre como tu sed.</p>
-                <p></p> <!-- Tercera línea vacía -->
+            <div class="enchantment-box">
+                <h2 class="enchantment-title">Nuevos Encantamientos:</h2>
+                <p class="enchantment-description">¡La magia en Minecraft se expande con nuevos encantamientos! Ahora podrás acceder a habilidades nunca vistas antes, Cada encantamiento traerá un poder especial, desde mejoras en el combate hasta ventajas en la recolección de recursos! ¡descúbrelos todos y lleva tu equipo a otro nivel!</p>
             </div>
 
-            <!-- 3er Cuadro -->
-            <div class="inner-box">
-                <h2>Armas y Armaduras</h2>
-                <img src="weapons.jpg" alt="Imagen de Armas y Armaduras"> <!-- Imagen añadida -->
-                <p></p> <!-- Primera línea vacía -->
-                <p>Cansado de las espaditas corrientes? Con este mod podrás ensamblar armas como rifles, escopetas u otros.</p>
-                <p></p> <!-- Tercera línea vacía -->
-            </div>
-
-            <!-- 4to Cuadro -->
-            <div class="inner-box">
-                <h2>Extras</h2>
-                <img src="mochilas.png" alt="Imagen de Extras"> <!-- Imagen añadida -->
-                <p></p> <!-- Primera línea vacía -->
-                <p>Sanity, backpacks, Enhanced Celestials: estos 3 mods añaden mochilas que van de niveles, un sistema de salud mental y 3 lunas (Blood Moon, Harvest Moon, Blue Moon).</p>
-                <p></p> <!-- Tercera línea vacía -->
+            <div class="enchantment-box">
+                <h2 class="enchantment-title">Encantamientos Superiores al Máximo:</h2>
+                <p class="enchantment-description">Los encantamientos no tienen límite en este mundo. Gracias a un sistema único, podrás encantar tus herramientas, armas y armaduras por encima de los niveles tradicionales. Pero no pienses que será fácil.</p>
             </div>
         </div>
     </div>
 
+    <script>
+        // Script para controlar la reproducción del audio al hacer clic en el gif
+        document.getElementById("playButton").addEventListener("click", function() {
+            var audio = document.getElementById("audio");
+            if (audio.paused) {
+                audio.play(); // Reproduce el audio
+            } else {
+                audio.pause(); // Si el audio ya está sonando, lo pausa
+            }
+        });
+    </script>
 </body>
 </html>
